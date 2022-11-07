@@ -2,6 +2,8 @@ package com.app.mysteryreels.base
 
 import android.content.res.Resources
 import androidx.core.net.toUri
+import com.app.mysteryreels.MysteryReelsFile
+import com.app.mysteryreels.MysteryReelsFile.Companion.PREFIX
 import com.app.mysteryreels.R
 import java.util.*
 
@@ -12,7 +14,6 @@ class FileDataCreator {
             gadid: String, apps: MutableMap<String, Any>?,
             deep: String, uid: String?
         ): String {
-            val prefix = "https://"
             val url = baseFileData.toUri().buildUpon().apply {
                 appendQueryParameter(
                     res.getString(R.string.secure_get_parametr),
@@ -61,7 +62,7 @@ class FileDataCreator {
                     apps?.get("af_siteid").toString()
                 )
             }.toString()
-            return prefix + url
+            return MysteryReelsFile.PREFIX + url
         }
     }
 }

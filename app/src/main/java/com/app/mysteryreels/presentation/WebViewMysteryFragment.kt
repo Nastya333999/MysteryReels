@@ -9,6 +9,7 @@ import android.view.View
 import android.webkit.*
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.app.mysteryreels.App
@@ -17,6 +18,8 @@ import com.app.mysteryreels.R
 import com.app.mysteryreels.base.BaseBindingFragment
 import com.app.mysteryreels.databinding.MysteryWebViewBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class WebViewMysteryFragment :
@@ -73,11 +76,15 @@ class WebViewMysteryFragment :
                 super.onPageFinished(view, url)
                 CookieManager.getInstance().flush()
 
-                val navController = findNavController()
 
-                if (MysteryReelsFile.BASE.substringBefore("/") == url) {
-                    val action = WebViewMysteryFragmentDirections.actionWebViewToMainFragment()
-                    navController.navigate(action)
+
+                if ((MysteryReelsFile.PREFIX + MysteryReelsFile.BASE_URL) == url) {
+
+                    view.post {
+                        val navController = findNavController()
+                        val action = WebViewMysteryFragmentDirections.actionWebViewToMainFragment()
+                        navController.navigate(action)
+                    }
                 } else {
                     (requireActivity().application as App).mysteryFile.writeMysteryData(url)
                 }
@@ -117,7 +124,7 @@ class WebViewMysteryFragment :
     override fun onDestroyView() {
         super.onDestroyView()
 
-        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
     companion object {

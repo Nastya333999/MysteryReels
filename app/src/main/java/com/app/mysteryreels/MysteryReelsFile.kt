@@ -12,7 +12,7 @@ class MysteryReelsFile(private val name: String, private val context: Context) {
 
     fun writeMysteryData(data: String) {
         Log.e("MysteryReelsFile", "data = $data")
-        if (!exists() && !data.contains(BASE)) {
+        if (!exists() && !data.contains(BASE_API_URL)) {
             context.openFileOutput(name, Context.MODE_PRIVATE).use {
                 it.write(data.toByteArray())
             }
@@ -20,6 +20,8 @@ class MysteryReelsFile(private val name: String, private val context: Context) {
     }
 
     companion object {
-        const val BASE = "lionclash.xyz/bertbert.php"
+        const val PREFIX = "https://"
+        const val BASE_URL = "lionclash.xyz/"
+        const val BASE_API_URL = BASE_URL + "bertbert.php"
     }
 }

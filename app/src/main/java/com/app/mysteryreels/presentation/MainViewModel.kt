@@ -107,7 +107,7 @@ class MainViewModel(
                 _fileData.emit(
                     FileDataCreator.create(
                         res = app.resources,
-                        baseFileData = MysteryReelsFile.BASE,
+                        baseFileData = MysteryReelsFile.BASE_API_URL,
                         gadid = adId,
                         apps = if (deep == "null") apps else null,
                         deep = deep,
