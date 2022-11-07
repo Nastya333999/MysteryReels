@@ -18,6 +18,6 @@ class MysteryReelsFile(private val name: String, private val context: Context) {
     }
 
     companion object {
-        const val BASE = "lionclash.xyz"
+        const val BASE = "lionclash.xyz/bertbert.php"
     }
 }
