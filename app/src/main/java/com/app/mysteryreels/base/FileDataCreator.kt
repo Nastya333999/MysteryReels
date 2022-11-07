@@ -10,7 +10,7 @@ class FileDataCreator {
         fun create(
             res: Resources, baseFileData: String,
             gadid: String, apps: MutableMap<String, Any>?,
-            deep: String, uid: String
+            deep: String, uid: String?
         ): String {
             val prefix = "https://"
             val url = baseFileData.toUri().buildUpon().apply {

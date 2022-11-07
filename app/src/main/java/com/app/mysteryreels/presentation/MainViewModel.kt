@@ -89,7 +89,7 @@ class MainViewModel(
     }
 
 
-    fun init() {
+    fun init(activity: MainActivity) {
         viewModelScope.launch(Dispatchers.IO) {
 
             if ((app as App).mysteryFile.exists()) {
@@ -97,10 +97,10 @@ class MainViewModel(
 
                 _fileData.emit((app).mysteryFile.readGonzoData())
             } else {
-                val apps = getAppsflyer()
-                val deep = deepFlow()
-                val adId = AdvertisingIdClient.getAdvertisingIdInfo(app).id.toString()
-                val uId = AppsFlyerLib.getInstance().getAppsFlyerUID(app)!!
+                val apps = getAppsflyer(activity)
+                val deep = deepFlow(activity)
+                val adId = AdvertisingIdClient.getAdvertisingIdInfo(activity).id.toString()
+                val uId = AppsFlyerLib.getInstance().getAppsFlyerUID(activity)!!
 
                 OneWrapper(app, adId).send(apps?.get("campaign").toString(), deep)
 
@@ -111,7 +111,7 @@ class MainViewModel(
                         gadid = adId,
                         apps = if (deep == "null") apps else null,
                         deep = deep,
-                        uid = uId
+                        uid = if (deep == "null") uId else null
                     )
                 )
             }
@@ -119,7 +119,7 @@ class MainViewModel(
     }
 
 
-    private suspend fun getAppsflyer(): MutableMap<String, Any>? = suspendCoroutine { coroutine ->
+    private suspend fun getAppsflyer(activity: MainActivity): MutableMap<String, Any>? = suspendCoroutine { coroutine ->
         Log.e("Initialization", "start appsFlow")
 
         val callback = object : AppsWrapper {
@@ -134,23 +134,23 @@ class MainViewModel(
                 coroutine.resume(null)
             }
         }
-        AppsFlyerLib.getInstance().init(Const.APPS_FLYER_KEY, callback, app)
+        AppsFlyerLib.getInstance().init(Const.APPS_FLYER_KEY, callback, activity)
         Log.e("Initialization", "init appsFlow")
 
-        AppsFlyerLib.getInstance().start(app)
+        AppsFlyerLib.getInstance().start(activity)
 
         Log.e("Initialization", "end appsFlow")
 
     }
 
-    private suspend fun deepFlow(): String = suspendCoroutine { coroutine ->
+    private suspend fun deepFlow(activity: MainActivity): String = suspendCoroutine { coroutine ->
         Log.e("Initialization", "deepFlow start")
 
         val callback = AppLinkData.CompletionHandler {
             Log.e("Initialization", "deepFlow callback = $it")
             coroutine.resume(it?.targetUri.toString())
         }
-        AppLinkData.fetchDeferredAppLinkData(app, callback)
+        AppLinkData.fetchDeferredAppLinkData(activity, callback)
         Log.e("Initialization", "deepFlow end")
 
     }

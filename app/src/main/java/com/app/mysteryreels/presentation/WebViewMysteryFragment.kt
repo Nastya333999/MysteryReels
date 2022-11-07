@@ -54,7 +54,7 @@ class WebViewMysteryFragment :
                     if (mysteryWebView.canGoBack()) {
                         mysteryWebView.goBack()
                     } else {
-                        isEnabled = false
+//                        isEnabled = false
                     }
                 }
             })

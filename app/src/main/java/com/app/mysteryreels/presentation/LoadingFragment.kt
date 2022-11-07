@@ -33,7 +33,7 @@ class LoadingFragment :
             findNavController().navigate(action)
         }
 
-        viewModel.init()
+        viewModel.init(requireActivity() as MainActivity)
     }
 
     private fun initUI() {
