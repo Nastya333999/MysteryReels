@@ -53,18 +53,8 @@ class LoadingFragment :
                 Settings.Global.ADB_ENABLED
             ) != "1"
 
-        fun isNotRoot(): Boolean = try {
-            val seq = sequenceOf(
-                "/sbin/su", "/system/bin/su",
-                "/system/xbin/su", "/data/local/xbin/su", "/data/local/bin/su",
-                "/system/sd/xbin/su", "/system/bin/failsafe/su", "/data/local/su"
-            ).map { File(it).exists() }
-            seq.all { !it }
-        } catch (e: SecurityException) {
-            true
-        }
 
-        return isNotADB() && isNotRoot()
+        return isNotADB()
     }
 
 
