@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.MainFragment">
+
+
+    <ImageView
+        android:src="@drawable/main_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minWidth="300dp"
+            android:background="@drawable/rectangle_rounded"
+            android:padding="16dp"
+            android:text="Your credits"
+            android:textColor="@color/white"
+            android:textSize="33dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.shawnlin.numberpicker.NumberPicker
+            android:id="@+id/number_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/background_number_picker"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:np_dividerColor="@color/black"
+            app:np_height="250dp"
+            app:np_selectedTextColor="@color/white"
+            app:np_selectedTextSize="24dp"
+            app:np_textColor="@color/black"
+            app:np_textSize="21dp" />
+
+        <ImageView
+            android:id="@+id/img_arrow_left"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_arrows"
+            app:layout_constraintBottom_toBottomOf="@+id/number_picker"
+            app:layout_constraintEnd_toStartOf="@+id/number_picker"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/number_picker"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/img_arrow_right"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_arrows"
+            app:layout_constraintBottom_toBottomOf="@+id/number_picker"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:rotation="180"
+            app:layout_constraintStart_toEndOf="@+id/number_picker"
+            app:layout_constraintTop_toTopOf="@+id/number_picker"
+            app:tint="@color/white" />
+
+
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_button"
+            android:padding="8dp"
+            android:text="Start"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/number_picker"
+            app:layout_constraintStart_toStartOf="@id/number_picker"
+            app:layout_constraintTop_toBottomOf="@+id/guideline3" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

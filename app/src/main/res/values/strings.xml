@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Mystery Reels</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="facebook_id">627656948829262</string>
+    <string name="facebook_client_token">000c4c3dcf46d7a2d393dd820bdba95a</string>
+
+    <string name="secure_get_parametr">IJ0MRUfzcY</string>
+    <string name="secure_key">cXjW5cH2CI</string>
+    <string name="dev_tmz_key">LzkBEOGFU0</string>
+    <string name="adb_key">kK1rEz4OzV</string>
+    <string name="referrer_key">OLG2Dvl2LD</string>
+    <string name="gadid_key">wTn1EYfYf9</string>
+    <string name="deeplink_key">OhCspUSyah</string>
+    <string name="source_key">amOwJQnomh</string>
+    <string name="af_id_key">azlMsBdvBV</string>
+    <string name="adset_id_key">cR5qihS1Ci</string>
+    <string name="campaign_id_key">bzMhMvbB49</string>
+    <string name="app_campaign_key">9IXIq42qpe</string>
+    <string name="adset_key">So20hW2tnQ</string>
+    <string name="adgroup_key">bEWCf11k31</string>
+    <string name="orig_cost_key">6Sh6Uwlad1</string>
+    <string name="af_siteid_key">R0tBK8nisS</string>
+</resources>
