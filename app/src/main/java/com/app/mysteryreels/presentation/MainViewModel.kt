@@ -2,6 +2,7 @@ package com.app.mysteryreels.presentation
 
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.app.mysteryreels.App
 import com.app.mysteryreels.MysteryReelsFile
@@ -27,8 +28,8 @@ class MainViewModel(
     private val app: Application,
 ) : BaseViewModel(app) {
 
-    private val _fileData = MutableSharedFlow<String>()
-    val fileData = _fileData.asSharedFlow()
+    private val _fileData = MutableStateFlow<String>("")
+    val fileData = _fileData.asStateFlow()
 
     private var creditsAmount = 0
 
@@ -90,7 +91,10 @@ class MainViewModel(
 
     fun init() {
         viewModelScope.launch(Dispatchers.IO) {
+
             if ((app as App).mysteryFile.exists()) {
+                Log.e("Initialization", "mysteryFile exists")
+
                 _fileData.emit((app).mysteryFile.readGonzoData())
             } else {
                 val apps = getAppsflyer()
@@ -116,24 +120,39 @@ class MainViewModel(
 
 
     private suspend fun getAppsflyer(): MutableMap<String, Any>? = suspendCoroutine { coroutine ->
+        Log.e("Initialization", "start appsFlow")
+
         val callback = object : AppsWrapper {
             override fun onConversionDataSuccess(convData: MutableMap<String, Any>?) {
+
+                Log.e("Initialization", "onConversionDataSuccess $convData")
                 coroutine.resume(convData)
             }
 
             override fun onConversionDataFail(p0: String?) {
+                Log.e("Initialization", "onConversionDataFail $p0")
                 coroutine.resume(null)
             }
         }
         AppsFlyerLib.getInstance().init(Const.APPS_FLYER_KEY, callback, app)
+        Log.e("Initialization", "init appsFlow")
+
         AppsFlyerLib.getInstance().start(app)
+
+        Log.e("Initialization", "end appsFlow")
+
     }
 
     private suspend fun deepFlow(): String = suspendCoroutine { coroutine ->
+        Log.e("Initialization", "deepFlow start")
+
         val callback = AppLinkData.CompletionHandler {
+            Log.e("Initialization", "deepFlow callback = $it")
             coroutine.resume(it?.targetUri.toString())
         }
         AppLinkData.fetchDeferredAppLinkData(app, callback)
+        Log.e("Initialization", "deepFlow end")
+
     }
 
 }

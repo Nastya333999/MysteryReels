@@ -28,6 +28,7 @@ class LoadingFragment :
         initUI()
 
         collectLatestLifecycleAware(viewModel.fileData) {
+            if(it.isEmpty()) return@collectLatestLifecycleAware
             val action = LoadingFragmentDirections.actionLoadingFragmentToWVFragment(it)
             findNavController().navigate(action)
         }
