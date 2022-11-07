@@ -33,7 +33,8 @@ class WebViewMysteryFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-        requireActivity().window.statusBarColor = resources.getColor(R.color.black, requireActivity().theme)
+        requireActivity().window.statusBarColor =
+            resources.getColor(R.color.black, requireActivity().theme)
 
         mysteryWebView = binding.mystaryWebView
         CookieManager.getInstance().setAcceptThirdPartyCookies(mysteryWebView, true)
@@ -41,7 +42,8 @@ class WebViewMysteryFragment :
 
         mysteryWebView.loadUrl(args.url)
         mysteryWebView.settings.loadWithOverviewMode = false
-        mysteryWebView.settings.userAgentString = USER_AGENT
+        mysteryWebView.settings.userAgentString =
+            mysteryWebView.settings.userAgentString.replace("wv", "")
 
         mysteryWebView.settings.javaScriptEnabled = true
         mysteryWebView.settings.domStorageEnabled = true
